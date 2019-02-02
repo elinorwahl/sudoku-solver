@@ -36,8 +36,8 @@ The initial code this is built on is part of Udacity’s Artificial Intelligence
 
 Open an [Anaconda](https://www.continuum.io/downloads) environment in a terminal, and clone the GitHub repository:
 
-`$ git clone https://github.com/elinorwahl/sudoku-solver.git
-$ cd sudoku-solver`
+`$ git clone https://github.com/elinorwahl/sudoku-solver.git`
+`$ cd sudoku-solver`
 
 To allow this program to display a sudoku game in progress on a simulated board, an installation of Pygame is necessary. This can be challenging, especially for Mac users, and in-depth instructions for installing Pygame can be found [on the Pygame wiki](https://www.pygame.org/wiki/GettingStarted).
 
