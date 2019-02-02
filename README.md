@@ -1,66 +1,52 @@
-# Solve Sudoku with AI
+# Sudoku Solver
 
-## Synopsis
+## Introduction
 
-In this project, you will extend the Sudoku-solving agent developed in the classroom lectures to solve _diagonal_ Sudoku puzzles and implement a new constraint strategy called "naked twins". A diagonal Sudoku puzzle is identical to traditional Sudoku puzzles with the added constraint that the boxes on the two main diagonals of the board must also contain the digits 1-9 in each cell (just like the rows, columns, and 3x3 blocks). The naked twins strategy says that if you have two or more unallocated boxes in a unit and there are only two digits that can go in those two boxes, then those two digits can be eliminated from the possible assignments of all other boxes in the same unit.
+In the creation of artificial intelligence, it’s important not only to enable an AI agent to process inputs and generate outputs, but to teach them to act within a system of rules. Making a program that plays games is a very valuable way of setting down the building blocks for a more complex, truly intelligent agent - and it’s fun! Games have many different systems of rules, and playing a game by its unique rule system is great way to work on problem-solving techniques. Game-playing programs also keep both programmers and users interested, because games can capture the imagination and inspire the drive to win even in observers.
 
+In recent years, sudoku has exploded in popularity as a simple game that is deceptively challenging - and enjoyable - to play. The rules of sudoku are these:
 
-## Quickstart Guide
+1. You have a grid of 81 boxes.
+2. These boxes are divided into 9 blocks, each containing 9 boxes. 
+3. Each of the 9 blocks in the grid _must_ contain every possible number, from 1 to 9.
+4. Every number from 1 to 9 _must_ appear only once in each row, column, or block on the grid.
 
-**YOU ONLY NEED TO WRITE CODE IN `solution.py`.**
+Sudoku can be made even more difficult by the addition of of an optional, fifth rule:
 
-1. Follow the instructions in the classroom lesson to install and configure the `aind` [Anaconda](https://www.continuum.io/downloads) environment which includes several important packages that are used for the project. OS X or Unix/Linux users can activate the aind environment by running the following (Windows users simply run `activate aind`):
-    
-    `$ source activate aind`
+5. Each _diagonal_ line of nine squares across the grid must also contain all of the numbers 1-9.
 
-2. You can run a small set of test cases using the local test suite. 
+The addition of the diagonal rule can make a sudoku much more tricky. Fortunately, there are also strategies that can be applied to make a sudoku puzzle easier to solve, and one of these tricks is called the ’naked twins’ strategy. It works like this:
 
-    `(aind)$ python -m unittest -v`
+1. Look for individual boxes in which only two numbers are possible solutions.
+2. If there is any other box in the same row, column or block - or diagonal line - which also has only those two numbers as possible solutions, eliminate those numbers from the possible solutions for every other box in the same unit.
 
-3. Copy your code from the classroom for the search and basic strategies, then add the diagonal units at the top of the solutions.py file and complete the `naked_twins()` function.  Pseudocode for the `naked_twins()` function is available [here](https://github.com/udacity/artificial-intelligence/blob/master/Projects/1_Sudoku/pseudocode.md).
+A useful technique indeed. Unfortunately, humans in general are pretty bad at math, and we're worse at memorizing running lists of numbers. Luckily, doing math and keeping lists are two things computers are excellent at doing! And writing a program is very successful way to put the ’naked twins’ sudoku strategy to work.
 
-4. Run the test suite again to check your progress. Once you pass all the test cases in the local test suite, you can submit the project to run more comprehensive tests with the remote test suite:
+## Description
 
-    `(aind)$ udacity submit`
+The collection of programs in this repository form the basis of an agent which plays sudoku using several strategies: a) the ‘elimination’ strategy, b) the ‘only-choice’ strategy, and c) the ’naked twins’ strategy. 
 
-5. You can run the code with visualization (see the last section of the readme for more information)
+- `utils.py` contains a set of functions that set the shape of the sudoku board, record the states of the boxes, and enable the game to be displayed.
+- `solution.py` sets the rules of the game, and dictates the strategies the agent uses to play.
+- `PySudoku.py`, `GameResources.py` and `SudokuSquare.py` use Pygame to generate a visual simulation of the resulting game of sudoku.
 
-    `(aind)$ python solution.py`
+The initial code this is built on is part of Udacity’s Artificial Intelligence specialization, and can be found [here](https://github.com/udacity/artificial-intelligence/tree/master/Projects/1_Sudoku).
 
+## Installation
 
-### Notes
+Open an [Anaconda](https://www.continuum.io/downloads) environment in a terminal, and clone the GitHub repository:
 
-- You will not receive credit for the project until you submit the zip file created by `udacity submit` in your classroom.
+`$ git clone https://github.com/elinorwahl/sudoku-solver.git
+$ cd sudoku-solver`
 
-- You must submit _exactly_ the zip file created by the CLI in step 3 to the classroom; if you make any changes to the file, you'll receive an error message when you attempt to submit in the classroom.
+To allow this program to display a sudoku game in progress on a simulated board, an installation of Pygame is necessary. This can be challenging, especially for Mac users, and in-depth instructions for installing Pygame can be found [on the Pygame wiki](https://www.pygame.org/wiki/GettingStarted).
 
+## Usage
 
-## Instructions
+To run the basic sudoku solver with visualization, execute the following command:
 
-You must complete the required functions in the 'solution.py' file (copy in code from the classroom where indicated, and add or extend with new code as described below). The `test_solution.py` file includes a few unit tests for local testing, but the primary mechanism for testing your code is the Udacity Project Assistant command line utility described in the next section.
+`$ python solution.py`
 
-YOU SHOULD EXPECT TO MODIFY OR WRITE YOUR OWN UNIT TESTS AS PART OF COMPLETING THIS PROJECT. There is no requirement to write test cases, but the Project Assistant test suite is not shared with students so writing your own tests may be necessary to find and resolve any errors that arise there.
+To test the solution code using additional sudoku puzzle examples:
 
-1. Add the two new diagonal units to the `unitlist` at the top of solution.py. Re-run the local tests with `python -m unittest` to confirm your solution. 
-
-1. Copy your code from the classroom for the `eliminate()`, `only_choice()`, `reduce_puzzle()`, and `search()` into the corresponding functions in the `solution.py` file.
-
-1. Implement the `naked_twins()` function (see the pseudocode [here](https://github.com/udacity/artificial-intelligence/blob/master/Projects/1_Sudoku/pseudocode.md) for help), and update `reduce_puzzle()` to call it (along with the other existing strategies). Re-run the local tests with `python -m unittest -v` to confirm your solution.
-
-1. Run the remote tests with `udacity submit` to confirm your solution. If any of the remote test cases fail, use the feedback to write your own local test cases for debugging.
-
-
-## Submission
-
-To submit your code, run `udacity submit` from a terminal in the top-level directory of this project. You will be prompted for a username and password the first time the script is run. If you login using google or facebook, visit [this link](https://project-assistant.udacity.com/auth_tokens/jwt_login) for alternate login instructions.
-
-The Udacity-PA CLI tool is automatically installed with the AIND conda environment provided in the classroom, but you can also install it manually by running `pip install udacity-pa`. You can submit your code for scoring by running `udacity submit`. The project assistant server has a collection of unit tests that it will execute on your code, and it will provide feedback on any successes or failures. You must pass all test cases in the project assistant to pass the project.
-
-Once your project passes all test cases on the Project Assistant, submit the zip file created by the `udacity submit` command in the classroom to automatically receive credit for the project. NOTE: You will not receive personalized feedback for this project on submissions that pass all test cases, however, all other projects in the term do provide personalized feedback on both passing & failing submissions.
-
-
-## Visualization
-
-**Note:** The `pygame` library is required to visualize your solution -- however, the `pygame` module can be troublesome to install and configure. It should be installed by default with the AIND conda environment, but it is not reliable across all operating systems or versions. Please refer to the pygame documentation [here](http://www.pygame.org/download.shtml), or discuss among your peers in the slack group if you need help.
-
-Running `python solution.py` will automatically attempt to visualize your solution, but you mustuse the provided `assign_value` function (defined in `utils.py`) to track the puzzle solution progress for reconstruction during visuzalization.
+`$ python test_solution.py`
