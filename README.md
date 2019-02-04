@@ -1,7 +1,5 @@
 # Sudoku Solver
 
-## Introduction
-
 In the creation of artificial intelligence, it’s important not only to enable an AI agent to process inputs and generate outputs, but to teach them to act within a system of rules. Making a program that plays games is a very valuable way of setting down the building blocks for a more complex, truly intelligent agent - and it’s fun! Games have many different systems of rules, and playing a game by its unique rule system is great way to work on problem-solving techniques. Game-playing programs also keep both programmers and users interested, because games can capture the imagination and inspire the drive to win even in observers.
 
 In recent years, sudoku has exploded in popularity as a simple game that is deceptively challenging - and enjoyable - to play. The rules of sudoku are these:
